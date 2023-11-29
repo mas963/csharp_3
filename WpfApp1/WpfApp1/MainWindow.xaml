@@ -5,14 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:ViewModel="clr-namespace:WpfApp1.Models.ViewModels"
+                 mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="865"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <ViewModel:MainWindowViewModel x:Key="VM" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Button Click="LaunchGitHubSite" ToolTip="Open up the Github site">
+                <iconPacks:PackIconModern Width="22"
+                                          Height="22"
+                                          Kind="SocialGithubOctocat" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
     <Grid>
-        <Label Content="Ad:" HorizontalAlignment="Left" Margin="50,49,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soyad:" HorizontalAlignment="Left" Margin="50,80,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="100,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="100,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Click Me!" HorizontalAlignment="Left" Margin="100,123,0,0" VerticalAlignment="Top" Height="61" Width="120" Click="Button_Click"/>
-
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="Red" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image HorizontalAlignment="Center" Height="100" Margin="0,18,0,0" VerticalAlignment="Top" Width="100" Source="/channels4_profile.jpg"/>
+        <Grid x:Name="MainGrid"    
+        DataContext="{Binding Source={StaticResource VM}}"     
+        HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="ButtonGet"    
+                Command="{Binding GetButtonClicked}"    
+                Width="120"    
+                Content="GET" Margin="92,49,653,347"/>
+            <DataGrid x:Name="DataGridUsers"    
+                  ItemsSource="{Binding Users}"    
+                  SelectedItem="{Binding SelectedUser}"    
+                   AutoGenerateColumns="False"    
+                  AlternatingRowBackground="LightBlue"     
+                  BorderBrush="Gray"     
+                  BorderThickness="5"      
+                  Background="LightGray"    
+                  Margin="10,187,10,0"    
+                  RowBackground="LightGray" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="ColumnUserId"    
+                                    Header="UserId"    
+                                    Binding="{Binding UserId}"/>
+                    <DataGridTextColumn x:Name="ColumnFirstName"    
+                                    Header="First Name"    
+                                    Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn x:Name="ColumnLastName"    
+                                    Header="Last Name"    
+                                    Binding="{Binding LastName}"/>
+                    <DataGridTextColumn x:Name="ColumnEmail"    
+                                    Header="Email"    
+                                    Binding="{Binding Email}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </mah:MetroWindow>

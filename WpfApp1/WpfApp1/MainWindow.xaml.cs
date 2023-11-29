@@ -1,21 +1,25 @@
 ﻿using MahApps.Metro.Controls;
 using System.Windows;
 
-namespace WpfApp1
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : MetroWindow
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+namespace WpfApp1;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello Guys!");
-        }
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : MetroWindow
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Hello Guys!");
+    }
+
+    private void LaunchGitHubSite(object sender, RoutedEventArgs e)
+    {
+
     }
 }
